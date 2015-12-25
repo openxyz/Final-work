@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>DeviseDemo</title>
+  <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
+  <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+  <%= csrf_meta_tags %>
+</head>
+<body>
+<header role="banner">
+  <nav class="main-nav">
+    <% unless user_signed_in? %>
+      <ul>
+        <li><a class="cd-signin" href="/users/sign_in">Sign in</a></li>
+        <li><a class="cd-signup" href="/users/sign_up">Sign up</a></li>
+      </ul>
+    <% else %>
+      <ul>
+        <li><%= @user.email %> </li>
+          <li>
+            <%= link_to('Logout', destroy_user_session_path, :method => :delete) %>
+          </li>
+      </ul>
+    <% end %>
+  </nav>
+</header>
+<%= yield %>
+
+</body>
+</html>

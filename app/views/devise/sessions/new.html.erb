@@ -1,0 +1,16 @@
+<div class="cd-user-modal-container">
+  <%= form_for(resource, as: resource_name, url: session_path(resource_name),html: { class: 'cd-form' }) do |f| %>
+    <div class="fieldset">
+      <%= f.email_field :email, autofocus: true , placeholder: 'E-mail' , class: 'full-width has-padding has-border' %>
+    </div>
+
+    <div class="fieldset">
+      <%= f.password_field :password, autocomplete: "off" , placeholder: 'password' , class: 'full-width has-padding has-border' %>
+    </div>
+
+    <div class="fieldset">
+      <%= f.submit "Log in" , class: 'full-width has-padding has-border'%>
+    </div>
+  <% end %>
+</div>
+

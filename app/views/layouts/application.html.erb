@@ -11,20 +11,32 @@
   <nav class="main-nav">
     <% unless user_signed_in? %>
       <ul>
-        <li><a class="cd-signin" href="/users/sign_in">Sign in</a></li>
-        <li><a class="cd-signup" href="/users/sign_up">Sign up</a></li>
+        <li><a class="cd-signin" href="/users/sign_in">登录</a></li>
       </ul>
     <% else %>
       <ul>
-        <li><%= @user.email %></li>
+        <%= content_tag :li, current_user.email %>
         <li>
-          <%= link_to('Logout', destroy_user_session_path, :method => :delete) %>
+          <%= link_to('上传', new_project_path, class: 'cd-signin') %>
+        </li>
+        <li>
+          <%= link_to('退出', destroy_user_session_path, method: :delete, class: 'cd-signin') %>
         </li>
       </ul>
     <% end %>
   </nav>
 </header>
-<%= yield %>
+<div class="navbar-brand">
+  <span style="height: 80px;line-height: 80px;overflow: hidden;margin-left: 80px;top:0;font-size: 40px;font-family:'KaiTi';position: absolute;">
+    <%= link_to "期末作业评测", root_path, style: 'color: white;' %>
+  </span>
+</div>
+<div class="container">
+  <% flash.each do |name, msg| %>
+    <%= content_tag :div, msg, class: 'alert alert-info' %>
+  <% end %>
+  <%= yield %>
+</div>
 
 </body>
 </html>

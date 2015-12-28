@@ -1,8 +1,38 @@
-<div class="panel panel-default">
-  <div class="panel-body">
-    <h2><%= @project.title %></h2>
-    <p><%= @project.description %></p>
+<div class="row">
+  <div class="col-md-8 col-md-offset-2">
+    <div class="panel panel-default">
+      <div class="panel-body">
+        <%= image_tag @project.image.url, class: 'center-block' %>
+        <h4>作品名称：<%= @project.title %></h4>
+        <p>作品介绍：<%= @project.description %></p>
+        <h5>点击进入主页：<%= link_to "#{@project.user.stuId}", "/demo/#{@project.user.stuId}/#{@project.user.stuId}/index.html", target: "_blank" %></h5>
+      </div>
+      <div class="panel-footer">
+        <div class="row">
+          <div class="col-md-6">
+            <span>作者：</span>
+            <%= @project.user.stuId %>
+            <%= @project.user.stuName %>
+          </div>
+          <div class="col-md-6">
+            <div class="btn-group pull-right">
+              <%= link_to like_project_path(@project), method: :put, class: 'btn btn-default' do %>
+                <span class="glyphicon glyphicon-heart">
+                  <%= @project.get_upvotes.size %>
+                </span>
+              <% end %>
+              <% if @project.user.email==current_user.email %>
+                <%= link_to 'delete', project_path, method: :delete, data: { confirm: "Are you sure?"}, class: 'btn btn-default' %>
+              <% end %>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
-  <div><%= link_to 'back', root_path %></div>
-  <div><%= link_to 'edit', edit_project_path %></div>
 </div>
+
+
+
+
+

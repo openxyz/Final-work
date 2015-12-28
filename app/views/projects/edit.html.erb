@@ -1,3 +1,20 @@
-<h1>Edit Your Project</h1>
-<%= render 'form' %>
-<%= link_to 'Cancel', project_path %>
+<div class="row">
+  <div class="col-md-8 col-md-offset-2">
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        <h2>Edit</h2>
+      </div>
+      <div class="panel-body">
+        <%= image_tag @project.image.url(:medium), class: 'center-block' %>
+        <%= render 'form' %>
+      </div>
+      <div class="panel-footer">
+        <%= link_to 'Cancel', project_path %>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+

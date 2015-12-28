@@ -5,3 +5,10 @@
 #
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
+csv.open |f| do
+
+ u = User.new();
+ u.name =
+     u.passw = f.system
+u.save
+end

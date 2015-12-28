@@ -1,23 +1,37 @@
-<%= simple_form_for @project, html: { multipart: true }  do |f| %>
-  <% if @project.errors.any? %>
-    <div id="errors">
-      <h2><%= pluralize(@project.errors.count, 'error') %></h2>
-      <p> prevented this project from saving </p>
-      <ul>
-        <% @project.errors.full_messages.each do |msg| %>
-          <li><%= msg %></li>
-        <% end %>
-      </ul>
-    </div>
+<div class="container">
+  <% flash.each do |name, msg| %>
+    <%= content_tag :div, msg, class: 'alert alert-info' %>
+  <% end %>
+  <%= yield %>
+</div>
+<div class="contact">
+  <h2>作品提交</h2>
+  <p>请在下方提交作业的相关信息，若多次提交，则以最后一次提交信息为准</p>
+  <%= simple_form_for @project, html: { multipart: true } do |f| %>
+    <h3>作品名称</h3>
+    <%= f.input :title, label: false, input_html: { class: 'fileName' }, error_html: { class: 'error'} %>
+    <h3>作品介绍</h3>
+    <%= f.input :description, label: false, input_html: { class: 'intro', placeholder: "请输入10个字以上的描述" }, error_html: { class: 'error'} %>
+    <h3>作品缩略图</h3>
+    <center>
+      <div id="preview">
+        <%= image_tag 'picture.png', id: 'imghead' %>
+      </div>
+      <br/>
+    </center>
+
+    <center>
+      <%= f.input :image, label: "图片上传：", input_html: { 'onchange' => "previewImage(this)" }, error_html: { class: 'error'} %>
+    </center>
+    <br/>
+
+    <h3>作品代码压缩包</h3>
+    <%= f.input :zip, label: "压缩包上传：", error_html: { class: 'error'} %>
+
+    <%= f.submit "提交" %>
   <% end %>
 
-
-  <div class="form-group">
-    <%= f.input :title ,input_html: { class:'form-control' }%>
+  <div>
+    <%= link_to '回到首页', root_path %>
   </div>
-  <div class="form-group">
-    <%= f.input :description , input_html: { class: 'form-control' }%>
-  </div>
-  <%= f.submit :submit , class: 'btn btn-primary' %>
-
-<% end %>
+</div>
